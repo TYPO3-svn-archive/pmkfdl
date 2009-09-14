@@ -28,10 +28,10 @@
  *
  *
  *   43: class tx_pmkfdl_hook implements tslib_content_stdWrapHook
- *   51:     function stdWrapPreProcess($content, array $configuration, tslib_cObj &$parentObject)
- *   61:     function stdWrapOverride($content, array $configuration, tslib_cObj &$parentObject)
- *   71:     function stdWrapProcess($content, array $configuration, tslib_cObj &$parentObject)
- *   84:     function stdWrapPostProcess($content, array $configuration, tslib_cObj &$parentObject)
+ *   53:     function stdWrapPreProcess($content, array $configuration, tslib_cObj &$parentObject)
+ *   65:     function stdWrapOverride($content, array $configuration, tslib_cObj &$parentObject)
+ *   77:     function stdWrapProcess($content, array $configuration, tslib_cObj &$parentObject)
+ *   92:     function stdWrapPostProcess($content, array $configuration, tslib_cObj &$parentObject)
  *
  * TOTAL FUNCTIONS: 4
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -43,30 +43,36 @@ require_once(t3lib_extMgm::extPath('pmkfdl').'class.tx_pmkfdl_makedownloadlink.p
 class tx_pmkfdl_hook implements tslib_content_stdWrapHook {
 
 	/**
-	 * [Describe function...]
+	 * Hook for modifying $content before core's stdWrap does anything
 	 *
-	 * @param	[type]		$content, array $configuration, tslib_cObj &$parentObject: ...
-	 * @return	[type]		...
+	 * @param	string		input value undergoing processing in this function. Possibly substituted by other values fetched from another source.
+	 * @param	array		TypoScript stdWrap properties
+	 * @param	tslib_cObj		parent content object
+	 * @return	string		further processed $content
 	 */
 	function stdWrapPreProcess($content, array $configuration, tslib_cObj &$parentObject) {
 		return $content;
 	}
 
 	/**
-	 * [Describe function...]
+	 * Hook for modifying $content after core's stdWrap has processed setContentToCurrent, setCurrent, lang, data, field, current, cObject, numRows, filelist and/or preUserFunc
 	 *
-	 * @param	[type]		$content, array $configuration, tslib_cObj &$parentObject: ...
-	 * @return	[type]		...
+	 * @param	string		input value undergoing processing in this function. Possibly substituted by other values fetched from another source.
+	 * @param	array		TypoScript stdWrap properties
+	 * @param	tslib_cObj		parent content object
+	 * @return	string		further processed $content
 	 */
 	function stdWrapOverride($content, array $configuration, tslib_cObj &$parentObject) {
 		return $content;
 	}
 
 	/**
-	 * [Describe function...]
+	 * Hook for modifying $content after core's stdWrap has processed override, preIfEmptyListNum, ifEmpty, ifBlank, listNum, trim and/or more (nested) stdWraps
 	 *
-	 * @param	[type]		$content, array $configuration, tslib_cObj &$parentObject: ...
-	 * @return	[type]		...
+	 * @param	string		input value undergoing processing in this function. Possibly substituted by other values fetched from another source.
+	 * @param	array		TypoScript "stdWrap properties".
+	 * @param	tslib_cObj		parent content object
+	 * @return	string		further processed $content
 	 */
 	function stdWrapProcess($content, array $configuration, tslib_cObj &$parentObject) {
 		if ($configuration['forceDownload']) {
@@ -76,10 +82,12 @@ class tx_pmkfdl_hook implements tslib_content_stdWrapHook {
 	}
 
 	/**
-	 * [Describe function...]
+	 * Hook for modifying $content after core's stdWrap has processed anything but debug
 	 *
-	 * @param	[type]		$content, array $configuration, tslib_cObj &$parentObject: ...
-	 * @return	[type]		...
+	 * @param	string		input value undergoing processing in this function. Possibly substituted by other values fetched from another source.
+	 * @param	array		TypoScript stdWrap properties
+	 * @param	tslib_cObj		parent content object
+	 * @return	string		further processed $content
 	 */
 	function stdWrapPostProcess($content, array $configuration, tslib_cObj &$parentObject) {
 		return $content;
