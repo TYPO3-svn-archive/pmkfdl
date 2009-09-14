@@ -1,0 +1,45 @@
+a:2:{s:4:"meta";a:3:{s:5:"title";s:18:"PMK Force Download";s:5:"descr";s:0:"";s:7:"options";a:2:{s:10:"usageCount";N;s:19:"includeCodeAbstract";N;}}s:5:"files";a:3:{s:14:"MD5_46cc00b8f8";a:4:{s:8:"filename";s:30:"class.tx_pmkforceddownload.php";s:8:"filesize";i:1783;s:6:"header";N;s:3:"DAT";a:2:{i:1;a:5:{s:6:"header";s:28:"class tx_pmkforceddownload {";s:5:"class";i:1;s:11:"parentClass";s:20:"tx_pmkforceddownload";s:4:"cDat";a:3:{s:4:"text";s:217:"
+
+[CLASS/FUNCTION INDEX of SCRIPT]
+
+
+
+  37: class tx_pmkforceddownload
+  46:     function forceDownload($content, $conf)
+
+TOTAL FUNCTIONS: 1
+(This index is automatically created/updated by the extension "extdeveval")
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}}s:6:"atLine";i:35;}i:3;a:7:{s:6:"header";s:41:"function forceDownload($content, $conf) {";s:11:"parentClass";s:20:"tx_pmkforceddownload";s:4:"cDat";a:3:{s:4:"text";s:68:"
+
+Modifies typolink output so that link points to pmkforceddownload
+";s:5:"param";a:2:{i:0;a:2:{i:0;s:6:"string";i:1;s:22:"$content: Current link";}i:1;a:2:{i:0;s:5:"array";i:1;s:22:"$$conf: Config options";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:23:"$content: Modified link";}}s:7:"content";s:0:"";s:12:"content_size";i:289;s:13:"content_lines";i:8;s:6:"atLine";i:44;}}}s:14:"MD5_f5fc6d8802";a:4:{s:8:"filename";s:31:"class.tx_pmkforceddownload2.php";s:8:"filesize";i:3606;s:6:"header";N;s:3:"DAT";a:3:{i:1;a:8:{s:6:"header";s:29:"class tx_pmkforceddownload2 {";s:5:"class";i:1;s:11:"parentClass";s:21:"tx_pmkforceddownload2";s:4:"cDat";a:3:{s:4:"text";s:237:"
+
+[CLASS/FUNCTION INDEX of SCRIPT]
+
+
+
+  38: class tx_pmkforceddownload2
+  48:     function forceDownload2()
+  87:     function getMimeType()
+
+TOTAL FUNCTIONS: 2
+(This index is automatically created/updated by the extension "extdeveval")
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}}s:7:"content";s:0:"";s:12:"content_size";i:116;s:13:"content_lines";i:4;s:6:"atLine";i:36;}i:3;a:4:{s:6:"header";s:27:"function forceDownload2() {";s:11:"parentClass";s:21:"tx_pmkforceddownload2";s:4:"cDat";a:3:{s:4:"text";s:25:"
+
+Force download of file
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:4:"void";i:1;s:0:"";}}s:6:"atLine";i:46;}i:5;a:7:{s:6:"header";s:24:"function getMimeType() {";s:11:"parentClass";s:21:"tx_pmkforceddownload2";s:4:"cDat";a:3:{s:4:"text";s:35:"
+
+Returns mimetype of current file
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:9:"$mimetype";}}s:7:"content";s:0:"";s:12:"content_size";i:773;s:13:"content_lines";i:22;s:6:"atLine";i:85;}}}s:14:"MD5_bddc7d61e1";a:4:{s:8:"filename";s:35:"class.tx_pmkforceddownload_hook.php";s:8:"filesize";i:3006;s:6:"header";N;s:3:"DAT";a:5:{i:1;a:7:{s:6:"header";s:70:"class tx_pmkforceddownload_hook implements tslib_content_stdWrapHook {";s:5:"class";i:1;s:11:"parentClass";s:25:"tx_pmkforceddownload_hook";s:7:"content";s:0:"";s:12:"content_size";i:2;s:13:"content_lines";i:1;s:6:"atLine";i:41;}i:3;a:7:{s:6:"header";s:87:"function stdWrapPreProcess($content, array $configuration, tslib_cObj &$parentObject) {";s:11:"parentClass";s:25:"tx_pmkforceddownload_hook";s:4:"cDat";a:3:{s:4:"text";s:25:"
+
+[Describe function...]
+";s:5:"param";a:1:{i:0;a:2:{i:0;s:6:"[type]";i:1;s:62:"$content, array $configuration, tslib_cObj &$parentObject: ...";}}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}}s:7:"content";s:0:"";s:12:"content_size";i:24;s:13:"content_lines";i:3;s:6:"atLine";i:49;}i:5;a:7:{s:6:"header";s:85:"function stdWrapOverride($content, array $configuration, tslib_cObj &$parentObject) {";s:11:"parentClass";s:25:"tx_pmkforceddownload_hook";s:4:"cDat";a:3:{s:4:"text";s:25:"
+
+[Describe function...]
+";s:5:"param";a:1:{i:0;a:2:{i:0;s:6:"[type]";i:1;s:62:"$content, array $configuration, tslib_cObj &$parentObject: ...";}}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}}s:7:"content";s:0:"";s:12:"content_size";i:24;s:13:"content_lines";i:3;s:6:"atLine";i:59;}i:7;a:4:{s:6:"header";s:84:"function stdWrapProcess($content, array $configuration, tslib_cObj &$parentObject) {";s:11:"parentClass";s:25:"tx_pmkforceddownload_hook";s:4:"cDat";a:3:{s:4:"text";s:25:"
+
+[Describe function...]
+";s:5:"param";a:1:{i:0;a:2:{i:0;s:6:"[type]";i:1;s:62:"$content, array $configuration, tslib_cObj &$parentObject: ...";}}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}}s:6:"atLine";i:69;}i:9;a:7:{s:6:"header";s:88:"function stdWrapPostProcess($content, array $configuration, tslib_cObj &$parentObject) {";s:11:"parentClass";s:25:"tx_pmkforceddownload_hook";s:4:"cDat";a:3:{s:4:"text";s:25:"
+
+[Describe function...]
+";s:5:"param";a:1:{i:0;a:2:{i:0;s:6:"[type]";i:1;s:62:"$content, array $configuration, tslib_cObj &$parentObject: ...";}}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}}s:7:"content";s:0:"";s:12:"content_size";i:26;s:13:"content_lines";i:3;s:6:"atLine";i:82;}}}}}
