@@ -1,45 +1,25 @@
-a:2:{s:4:"meta";a:3:{s:5:"title";s:18:"PMK Force Download";s:5:"descr";s:0:"";s:7:"options";a:2:{s:10:"usageCount";N;s:19:"includeCodeAbstract";N;}}s:5:"files";a:3:{s:14:"MD5_e77af56c9e";a:4:{s:8:"filename";s:28:"class.tx_pmkfdl_download.php";s:8:"filesize";i:4048;s:6:"header";N;s:3:"DAT";a:3:{i:1;a:8:{s:6:"header";s:26:"class tx_pmkfdl_download {";s:5:"class";i:1;s:11:"parentClass";s:18:"tx_pmkfdl_download";s:4:"cDat";a:3:{s:4:"text";s:233:"
+a:2:{s:4:"meta";a:3:{s:5:"title";s:18:"PMK Force Download";s:5:"descr";s:0:"";s:7:"options";a:2:{s:10:"usageCount";N;s:19:"includeCodeAbstract";N;}}s:5:"files";a:2:{s:14:"MD5_e77af56c9e";a:4:{s:8:"filename";s:28:"class.tx_pmkfdl_download.php";s:8:"filesize";i:4239;s:6:"header";N;s:3:"DAT";a:3:{i:1;a:8:{s:6:"header";s:26:"class tx_pmkfdl_download {";s:5:"class";i:1;s:11:"parentClass";s:18:"tx_pmkfdl_download";s:4:"cDat";a:3:{s:4:"text";s:13:"
 
-[CLASS/FUNCTION INDEX of SCRIPT]
-
-
-
-  38: class tx_pmkfdl_download
-  48:     function forceDownload()
-  91:     function getMimeType()
-
-TOTAL FUNCTIONS: 2
-(This index is automatically created/updated by the extension "extdeveval")
-";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}}s:7:"content";s:0:"";s:12:"content_size";i:123;s:13:"content_lines";i:4;s:6:"atLine";i:36;}i:3;a:4:{s:6:"header";s:26:"function forceDownload() {";s:11:"parentClass";s:18:"tx_pmkfdl_download";s:4:"cDat";a:3:{s:4:"text";s:25:"
+Main class
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}}s:7:"content";s:0:"";s:12:"content_size";i:121;s:13:"content_lines";i:4;s:6:"atLine";i:43;}i:3;a:4:{s:6:"header";s:33:"public function forceDownload() {";s:11:"parentClass";s:18:"tx_pmkfdl_download";s:4:"cDat";a:3:{s:4:"text";s:25:"
 
 Force download of file
-";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:4:"void";i:1;s:0:"";}}s:6:"atLine";i:46;}i:5;a:7:{s:6:"header";s:24:"function getMimeType() {";s:11:"parentClass";s:18:"tx_pmkfdl_download";s:4:"cDat";a:3:{s:4:"text";s:35:"
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:4:"void";i:1;s:0:"";}}s:6:"atLine";i:53;}i:5;a:7:{s:6:"header";s:31:"public function getMimeType() {";s:11:"parentClass";s:18:"tx_pmkfdl_download";s:4:"cDat";a:3:{s:4:"text";s:35:"
 
 Returns mimetype of current file
-";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:9:"$mimetype";}}s:7:"content";s:0:"";s:12:"content_size";i:940;s:13:"content_lines";i:27;s:6:"atLine";i:89;}}}s:14:"MD5_07d16e3590";a:4:{s:8:"filename";s:24:"class.tx_pmkfdl_hook.php";s:8:"filesize";i:4262;s:6:"header";N;s:3:"DAT";a:5:{i:1;a:7:{s:6:"header";s:59:"class tx_pmkfdl_hook implements tslib_content_stdWrapHook {";s:5:"class";i:1;s:11:"parentClass";s:14:"tx_pmkfdl_hook";s:7:"content";s:0:"";s:12:"content_size";i:2;s:13:"content_lines";i:1;s:6:"atLine";i:41;}i:3;a:7:{s:6:"header";s:87:"function stdWrapPreProcess($content, array $configuration, tslib_cObj &$parentObject) {";s:11:"parentClass";s:14:"tx_pmkfdl_hook";s:4:"cDat";a:3:{s:4:"text";s:66:"
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:48:"$mimetype; Mimetype that match selected filetype";}}s:7:"content";s:0:"";s:12:"content_size";i:1049;s:13:"content_lines";i:29;s:6:"atLine";i:97;}}}s:14:"MD5_07d16e3590";a:4:{s:8:"filename";s:24:"class.tx_pmkfdl_hook.php";s:8:"filesize";i:4371;s:6:"header";N;s:3:"DAT";a:5:{i:1;a:8:{s:6:"header";s:59:"class tx_pmkfdl_hook implements tslib_content_stdWrapHook {";s:5:"class";i:1;s:11:"parentClass";s:14:"tx_pmkfdl_hook";s:4:"cDat";a:3:{s:4:"text";s:75:"
+
+Class which hook into tslib_content and do additional stdWrap processing
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}}s:7:"content";s:0:"";s:12:"content_size";i:2;s:13:"content_lines";i:1;s:6:"atLine";i:45;}i:3;a:7:{s:6:"header";s:94:"public function stdWrapPreProcess($content, array $configuration, tslib_cObj &$parentObject) {";s:11:"parentClass";s:14:"tx_pmkfdl_hook";s:4:"cDat";a:3:{s:4:"text";s:66:"
 
 Hook for modifying $content before core's stdWrap does anything
-";s:5:"param";a:3:{i:0;a:2:{i:0;s:6:"string";i:1;s:117:"input value undergoing processing in this function. Possibly substituted by other values fetched from another source.";}i:1;a:2:{i:0;s:5:"array";i:1;s:29:"TypoScript stdWrap properties";}i:2;a:2:{i:0;s:10:"tslib_cObj";i:1;s:21:"parent content object";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:26:"further processed $content";}}s:7:"content";s:0:"";s:12:"content_size";i:24;s:13:"content_lines";i:3;s:6:"atLine";i:51;}i:5;a:7:{s:6:"header";s:85:"function stdWrapOverride($content, array $configuration, tslib_cObj &$parentObject) {";s:11:"parentClass";s:14:"tx_pmkfdl_hook";s:4:"cDat";a:3:{s:4:"text";s:172:"
+";s:5:"param";a:3:{i:0;a:2:{i:0;s:6:"string";i:1;s:117:"input value undergoing processing in this function. Possibly substituted by other values fetched from another source.";}i:1;a:2:{i:0;s:5:"array";i:1;s:29:"TypoScript stdWrap properties";}i:2;a:2:{i:0;s:10:"tslib_cObj";i:1;s:21:"parent content object";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:26:"further processed $content";}}s:7:"content";s:0:"";s:12:"content_size";i:24;s:13:"content_lines";i:3;s:6:"atLine";i:55;}i:5;a:7:{s:6:"header";s:92:"public function stdWrapOverride($content, array $configuration, tslib_cObj &$parentObject) {";s:11:"parentClass";s:14:"tx_pmkfdl_hook";s:4:"cDat";a:3:{s:4:"text";s:172:"
 
 Hook for modifying $content after core's stdWrap has processed setContentToCurrent, setCurrent, lang, data, field, current, cObject, numRows, filelist and/or preUserFunc
-";s:5:"param";a:3:{i:0;a:2:{i:0;s:6:"string";i:1;s:117:"input value undergoing processing in this function. Possibly substituted by other values fetched from another source.";}i:1;a:2:{i:0;s:5:"array";i:1;s:29:"TypoScript stdWrap properties";}i:2;a:2:{i:0;s:10:"tslib_cObj";i:1;s:21:"parent content object";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:26:"further processed $content";}}s:7:"content";s:0:"";s:12:"content_size";i:24;s:13:"content_lines";i:3;s:6:"atLine";i:63;}i:7;a:4:{s:6:"header";s:84:"function stdWrapProcess($content, array $configuration, tslib_cObj &$parentObject) {";s:11:"parentClass";s:14:"tx_pmkfdl_hook";s:4:"cDat";a:3:{s:4:"text";s:156:"
+";s:5:"param";a:3:{i:0;a:2:{i:0;s:6:"string";i:1;s:117:"input value undergoing processing in this function. Possibly substituted by other values fetched from another source.";}i:1;a:2:{i:0;s:5:"array";i:1;s:29:"TypoScript stdWrap properties";}i:2;a:2:{i:0;s:10:"tslib_cObj";i:1;s:21:"parent content object";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:26:"further processed $content";}}s:7:"content";s:0:"";s:12:"content_size";i:24;s:13:"content_lines";i:3;s:6:"atLine";i:67;}i:7;a:4:{s:6:"header";s:91:"public function stdWrapProcess($content, array $configuration, tslib_cObj &$parentObject) {";s:11:"parentClass";s:14:"tx_pmkfdl_hook";s:4:"cDat";a:3:{s:4:"text";s:156:"
 
 Hook for modifying $content after core's stdWrap has processed override, preIfEmptyListNum, ifEmpty, ifBlank, listNum, trim and/or more (nested) stdWraps
-";s:5:"param";a:3:{i:0;a:2:{i:0;s:6:"string";i:1;s:117:"input value undergoing processing in this function. Possibly substituted by other values fetched from another source.";}i:1;a:2:{i:0;s:5:"array";i:1;s:32:"TypoScript "stdWrap properties".";}i:2;a:2:{i:0;s:10:"tslib_cObj";i:1;s:21:"parent content object";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:26:"further processed $content";}}s:6:"atLine";i:75;}i:9;a:7:{s:6:"header";s:88:"function stdWrapPostProcess($content, array $configuration, tslib_cObj &$parentObject) {";s:11:"parentClass";s:14:"tx_pmkfdl_hook";s:4:"cDat";a:3:{s:4:"text";s:84:"
+";s:5:"param";a:3:{i:0;a:2:{i:0;s:6:"string";i:1;s:117:"input value undergoing processing in this function. Possibly substituted by other values fetched from another source.";}i:1;a:2:{i:0;s:5:"array";i:1;s:32:"TypoScript "stdWrap properties".";}i:2;a:2:{i:0;s:10:"tslib_cObj";i:1;s:21:"parent content object";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:26:"further processed $content";}}s:6:"atLine";i:79;}i:9;a:7:{s:6:"header";s:95:"public function stdWrapPostProcess($content, array $configuration, tslib_cObj &$parentObject) {";s:11:"parentClass";s:14:"tx_pmkfdl_hook";s:4:"cDat";a:3:{s:4:"text";s:84:"
 
 Hook for modifying $content after core's stdWrap has processed anything but debug
-";s:5:"param";a:3:{i:0;a:2:{i:0;s:6:"string";i:1;s:117:"input value undergoing processing in this function. Possibly substituted by other values fetched from another source.";}i:1;a:2:{i:0;s:5:"array";i:1;s:29:"TypoScript stdWrap properties";}i:2;a:2:{i:0;s:10:"tslib_cObj";i:1;s:21:"parent content object";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:26:"further processed $content";}}s:7:"content";s:0:"";s:12:"content_size";i:235;s:13:"content_lines";i:6;s:6:"atLine";i:90;}}}s:14:"MD5_12282a9d62";a:4:{s:8:"filename";s:36:"class.tx_pmkfdl_makedownloadlink.php";s:8:"filesize";i:2079;s:6:"header";N;s:3:"DAT";a:2:{i:1;a:5:{s:6:"header";s:34:"class tx_pmkfdl_makedownloadlink {";s:5:"class";i:1;s:11:"parentClass";s:26:"tx_pmkfdl_makedownloadlink";s:4:"cDat";a:3:{s:4:"text";s:226:"
-
-[CLASS/FUNCTION INDEX of SCRIPT]
-
-
-
-  37: class tx_pmkfdl_makedownloadlink
-  46:     function makeDownloadLink($content, $conf)
-
-TOTAL FUNCTIONS: 1
-(This index is automatically created/updated by the extension "extdeveval")
-";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}}s:6:"atLine";i:35;}i:3;a:7:{s:6:"header";s:44:"function makeDownloadLink($content, $conf) {";s:11:"parentClass";s:26:"tx_pmkfdl_makedownloadlink";s:4:"cDat";a:3:{s:4:"text";s:57:"
-
-Modifies typolink output so that link points to pmkfdl
-";s:5:"param";a:2:{i:0;a:2:{i:0;s:6:"string";i:1;s:22:"$content: Current link";}i:1;a:2:{i:0;s:5:"array";i:1;s:22:"$$conf: Config options";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:23:"$content: Modified link";}}s:7:"content";s:0:"";s:12:"content_size";i:578;s:13:"content_lines";i:13;s:6:"atLine";i:44;}}}}}
+";s:5:"param";a:3:{i:0;a:2:{i:0;s:6:"string";i:1;s:117:"input value undergoing processing in this function. Possibly substituted by other values fetched from another source.";}i:1;a:2:{i:0;s:5:"array";i:1;s:29:"TypoScript stdWrap properties";}i:2;a:2:{i:0;s:10:"tslib_cObj";i:1;s:21:"parent content object";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:26:"further processed $content";}}s:7:"content";s:0:"";s:12:"content_size";i:235;s:13:"content_lines";i:6;s:6:"atLine";i:94;}}}}}

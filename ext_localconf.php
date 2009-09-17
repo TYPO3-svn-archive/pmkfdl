@@ -5,7 +5,7 @@ if (TYPO3_branch>4.1) {
 	$TYPO3_CONF_VARS['SC_OPTIONS']['tslib/class.tslib_content.php']['stdWrap'][] = 'EXT:pmkfdl/class.tx_pmkfdl_hook.php:&tx_pmkfdl_hook';
 }
 else {
-	require_once(t3lib_extMgm::extPath('pmkfdl').'class.tx_pmkfdl_makedownloadlink.php');
+	require_once(t3lib_extMgm::extPath('pmkfdl').'class.tx_pmkfdl.php');
 }
 $TYPO3_CONF_VARS['FE']['eID_include']['pmkfdl'] = 'EXT:pmkfdl/class.tx_pmkfdl_download.php';
 ?>

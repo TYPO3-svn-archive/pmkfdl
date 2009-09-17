@@ -27,19 +27,23 @@
  *
  *
  *
- *   43: class tx_pmkfdl_hook implements tslib_content_stdWrapHook
- *   53:     function stdWrapPreProcess($content, array $configuration, tslib_cObj &$parentObject)
- *   65:     function stdWrapOverride($content, array $configuration, tslib_cObj &$parentObject)
- *   77:     function stdWrapProcess($content, array $configuration, tslib_cObj &$parentObject)
- *   92:     function stdWrapPostProcess($content, array $configuration, tslib_cObj &$parentObject)
+ *   47: class tx_pmkfdl_hook implements tslib_content_stdWrapHook
+ *   57:     public function stdWrapPreProcess($content, array $configuration, tslib_cObj &$parentObject)
+ *   69:     public function stdWrapOverride($content, array $configuration, tslib_cObj &$parentObject)
+ *   81:     public function stdWrapProcess($content, array $configuration, tslib_cObj &$parentObject)
+ *   96:     public function stdWrapPostProcess($content, array $configuration, tslib_cObj &$parentObject)
  *
  * TOTAL FUNCTIONS: 4
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
 require_once(PATH_typo3.'/sysext/cms/tslib/interfaces/interface.tslib_content_stdwraphook.php');
-require_once(t3lib_extMgm::extPath('pmkfdl').'class.tx_pmkfdl_makedownloadlink.php');
+require_once(t3lib_extMgm::extPath('pmkfdl').'class.tx_pmkfdl.php');
 
+/**
+ * Class which hook into tslib_content and do additional stdWrap processing
+ *
+ */
 class tx_pmkfdl_hook implements tslib_content_stdWrapHook {
 
 	/**
@@ -50,7 +54,7 @@ class tx_pmkfdl_hook implements tslib_content_stdWrapHook {
 	 * @param	tslib_cObj		parent content object
 	 * @return	string		further processed $content
 	 */
-	function stdWrapPreProcess($content, array $configuration, tslib_cObj &$parentObject) {
+	public function stdWrapPreProcess($content, array $configuration, tslib_cObj &$parentObject) {
 		return $content;
 	}
 
@@ -62,7 +66,7 @@ class tx_pmkfdl_hook implements tslib_content_stdWrapHook {
 	 * @param	tslib_cObj		parent content object
 	 * @return	string		further processed $content
 	 */
-	function stdWrapOverride($content, array $configuration, tslib_cObj &$parentObject) {
+	public function stdWrapOverride($content, array $configuration, tslib_cObj &$parentObject) {
 		return $content;
 	}
 
@@ -74,9 +78,9 @@ class tx_pmkfdl_hook implements tslib_content_stdWrapHook {
 	 * @param	tslib_cObj		parent content object
 	 * @return	string		further processed $content
 	 */
-	function stdWrapProcess($content, array $configuration, tslib_cObj &$parentObject) {
+	public function stdWrapProcess($content, array $configuration, tslib_cObj &$parentObject) {
 		if ($configuration['forceDownload']) {
-			$content = tx_pmkfdl_makedownloadlink::makeDownloadLink($content,$configuration);
+			$content = tx_pmkfdl::makeDownloadLink($content,$configuration);
 		}
 		return $content;
 	}
@@ -89,7 +93,7 @@ class tx_pmkfdl_hook implements tslib_content_stdWrapHook {
 	 * @param	tslib_cObj		parent content object
 	 * @return	string		further processed $content
 	 */
-	function stdWrapPostProcess($content, array $configuration, tslib_cObj &$parentObject) {
+	public function stdWrapPostProcess($content, array $configuration, tslib_cObj &$parentObject) {
 		return $content;
 	}
 }
