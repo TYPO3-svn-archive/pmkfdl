@@ -56,7 +56,7 @@
 			$filepath = PATH_site.$file;
 			if (file_exists($filepath)) {
 				$content = 'index.php?eID=pmkfdl&file='.urlencode($file).'&ck='.md5_file($filepath);
-				if ($conf['forceDownload']=='forcedl') 
+				if ($conf['makeDownloadLink']=='forcedl')
 					$content.='&forcedl=1';
 			}
 			return $content;

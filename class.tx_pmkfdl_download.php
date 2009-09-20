@@ -28,7 +28,7 @@
  *
  *
  *   45: class tx_pmkfdl_download
- *   52:     public function forceDownload()
+ *   52:     public function makeDownloadLink()
  *   98:     public function getMimeType()
  *
  * TOTAL FUNCTIONS: 2
@@ -49,7 +49,7 @@ require_once(PATH_t3lib.'class.t3lib_div.php');
  *
  * @return	void
  */
-		public function forceDownload() {
+		public function makeDownloadLink() {
 			// Currently not needed.
 			//$feUserObj = tslib_eidtools::initFeUser(); // Initialize FE user object
 			//tslib_eidtools::connectDB(); //Connect to database
@@ -123,5 +123,5 @@ require_once(PATH_t3lib.'class.t3lib_div.php');
 
 	// Make instance:
 	$output = t3lib_div::makeInstance('tx_pmkfdl_download');
-	$output->forceDownload();
+	$output->makeDownloadLink();
 ?>
