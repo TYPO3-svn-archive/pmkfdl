@@ -3,7 +3,7 @@
 ########################################################################
 # Extension Manager/Repository config file for ext: "pmkfdl"
 #
-# Auto generated 20-09-2009 13:25
+# Auto generated 20-09-2009 22:58
 #
 # Manual updates:
 # Only the data in the array - anything else is removed by next write.
@@ -29,7 +29,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
 	'author_company' => '',
-	'version' => '0.0.4',
+	'version' => '0.1.0',
 	'constraints' => array(
 		'depends' => array(
 		),
@@ -38,7 +38,7 @@ $EM_CONF[$_EXTKEY] = array(
 		'suggests' => array(
 		),
 	),
-	'_md5_values_when_last_written' => 'a:11:{s:9:"ChangeLog";s:4:"7c28";s:10:"README.txt";s:4:"ee2d";s:19:"class.tx_pmkfdl.php";s:4:"8dc4";s:28:"class.tx_pmkfdl_download.php";s:4:"d7b8";s:24:"class.tx_pmkfdl_hook.php";s:4:"4d75";s:21:"ext_conf_template.txt";s:4:"9045";s:12:"ext_icon.gif";s:4:"84d7";s:17:"ext_localconf.php";s:4:"5575";s:15:"ext_php_api.dat";s:4:"5e66";s:13:"mimetypes.php";s:4:"9686";s:14:"doc/manual.sxw";s:4:"4514";}',
+	'_md5_values_when_last_written' => 'a:11:{s:9:"ChangeLog";s:4:"7c28";s:10:"README.txt";s:4:"ee2d";s:19:"class.tx_pmkfdl.php";s:4:"8dc4";s:28:"class.tx_pmkfdl_download.php";s:4:"d7b8";s:24:"class.tx_pmkfdl_hook.php";s:4:"4d75";s:21:"ext_conf_template.txt";s:4:"f2ef";s:12:"ext_icon.gif";s:4:"84d7";s:17:"ext_localconf.php";s:4:"5575";s:15:"ext_php_api.dat";s:4:"5e66";s:13:"mimetypes.php";s:4:"9686";s:14:"doc/manual.sxw";s:4:"da12";}',
 	'suggests' => array(
 	),
 );
