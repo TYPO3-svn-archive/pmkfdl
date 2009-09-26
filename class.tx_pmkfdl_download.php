@@ -100,12 +100,12 @@ require_once(PATH_t3lib.'class.t3lib_div.php');
 			// 1st choice: finfo_file
 			if (function_exists('finfo_file')) {
 				$finfo = finfo_open(FILEINFO_MIME);
-				$mimetype = finfo_file($finfo, $this->file);
+				$mimetype = finfo_file($finfo, PATH_site.$this->file);
 				finfo_close($finfo);
 			}
 			// 2nd choice: mime_content_type
 			if ($mimetype == '' && function_exists('mime_content_type')) {
-				$mimetype = mime_content_type($this->file);
+				$mimetype = mime_content_type(PATH_site.$this->file);
 			}
 			// 3rd choice: Use external list of mimetypes
 			if ($mimetype == '') {
