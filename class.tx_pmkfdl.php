@@ -54,12 +54,14 @@
 		public function makeDownloadLink($content, $conf) {
 			$file = str_replace(t3lib_div::getIndpEnv('TYPO3_SITE_URL'), '', $content);
 			$filepath = PATH_site.$file;
+			$filesegments = pathinfo(strtolower($filepath));
 			$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['pmkfdl']);
 			$blockedExt = preg_split('/\s*,\s*/',$extConf['blockedExt']);
 			if (file_exists($filepath) && !in_array($filesegments['extension'], $blockedExt)) {
 				$content = 'index.php?eID=pmkfdl&file='.urlencode($file).'&ck='.md5_file($filepath);
-				if ($conf['makeDownloadLink']=='forcedl')
-					$content.='&forcedl=1';
+				if ($conf['makeDownloadLink']=='forcedl') $content.='&forcedl=1';
+				$GLOBALS['TSFE']->register['filesize'] = filesize($filepath);
+				$GLOBALS['TSFE']->register['filetype'] = $filesegments['extension'];
 			}
 			return $content;
 		}
