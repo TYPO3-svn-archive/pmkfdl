@@ -1,4 +1,4 @@
-a:2:{s:4:"meta";a:3:{s:5:"title";s:18:"PMK Force Download";s:5:"descr";s:0:"";s:7:"options";a:2:{s:10:"usageCount";N;s:19:"includeCodeAbstract";N;}}s:5:"files";a:3:{s:14:"MD5_0133afcec2";a:4:{s:8:"filename";s:19:"class.tx_pmkfdl.php";s:8:"filesize";i:2310;s:6:"header";N;s:3:"DAT";a:2:{i:1;a:5:{s:6:"header";s:17:"class tx_pmkfdl {";s:5:"class";i:1;s:11:"parentClass";s:9:"tx_pmkfdl";s:4:"cDat";a:3:{s:4:"text";s:257:"
+a:2:{s:4:"meta";a:3:{s:5:"title";s:18:"PMK Force Download";s:5:"descr";s:0:"";s:7:"options";a:2:{s:10:"usageCount";N;s:19:"includeCodeAbstract";N;}}s:5:"files";a:3:{s:14:"MD5_0133afcec2";a:4:{s:8:"filename";s:19:"class.tx_pmkfdl.php";s:8:"filesize";i:3182;s:6:"header";N;s:3:"DAT";a:2:{i:1;a:5:{s:6:"header";s:17:"class tx_pmkfdl {";s:5:"class";i:1;s:11:"parentClass";s:9:"tx_pmkfdl";s:4:"cDat";a:3:{s:4:"text";s:257:"
 
 USE:
 The class is intended to be used without creating an instance of it.
@@ -7,16 +7,16 @@ So use tx_pmkfdl::[method-name] to refer to the functions, eg. 'tx_pmkfdl::makeD
 ";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}}s:6:"atLine";i:43;}i:3;a:7:{s:6:"header";s:51:"public function makeDownloadLink($content, $conf) {";s:11:"parentClass";s:9:"tx_pmkfdl";s:4:"cDat";a:3:{s:4:"text";s:57:"
 
 Modifies typolink output so that link points to pmkfdl
-";s:5:"param";a:2:{i:0;a:2:{i:0;s:6:"string";i:1;s:22:"$content: Current link";}i:1;a:2:{i:0;s:5:"array";i:1;s:22:"$$conf: Config options";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:23:"$content: Modified link";}}s:7:"content";s:0:"";s:12:"content_size";i:543;s:13:"content_lines";i:15;s:6:"atLine";i:52;}}}s:14:"MD5_e77af56c9e";a:4:{s:8:"filename";s:28:"class.tx_pmkfdl_download.php";s:8:"filesize";i:4327;s:6:"header";N;s:3:"DAT";a:3:{i:1;a:8:{s:6:"header";s:26:"class tx_pmkfdl_download {";s:5:"class";i:1;s:11:"parentClass";s:18:"tx_pmkfdl_download";s:4:"cDat";a:3:{s:4:"text";s:69:"
+";s:5:"param";a:2:{i:0;a:2:{i:0;s:6:"string";i:1;s:22:"$content: Current link";}i:1;a:2:{i:0;s:5:"array";i:1;s:22:"$$conf: Config options";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:23:"$content: Modified link";}}s:7:"content";s:0:"";s:12:"content_size";i:1332;s:13:"content_lines";i:28;s:6:"atLine";i:52;}}}s:14:"MD5_e77af56c9e";a:4:{s:8:"filename";s:28:"class.tx_pmkfdl_download.php";s:8:"filesize";i:4870;s:6:"header";N;s:3:"DAT";a:3:{i:1;a:8:{s:6:"header";s:26:"class tx_pmkfdl_download {";s:5:"class";i:1;s:11:"parentClass";s:18:"tx_pmkfdl_download";s:4:"cDat";a:3:{s:4:"text";s:69:"
 
 Main class. eID based. Sends the file using the 'header' function.
-";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}}s:7:"content";s:0:"";s:12:"content_size";i:1;s:13:"content_lines";i:1;s:6:"atLine";i:43;}i:3;a:4:{s:6:"header";s:36:"public function makeDownloadLink() {";s:11:"parentClass";s:18:"tx_pmkfdl_download";s:4:"cDat";a:3:{s:4:"text";s:25:"
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}}s:7:"content";s:0:"";s:12:"content_size";i:1;s:13:"content_lines";i:1;s:6:"atLine";i:44;}i:3;a:4:{s:6:"header";s:36:"public function makeDownloadLink() {";s:11:"parentClass";s:18:"tx_pmkfdl_download";s:4:"cDat";a:3:{s:4:"text";s:25:"
 
 Force download of file
-";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:4:"void";i:1;s:0:"";}}s:6:"atLine";i:50;}i:5;a:7:{s:6:"header";s:31:"public function getMimeType() {";s:11:"parentClass";s:18:"tx_pmkfdl_download";s:4:"cDat";a:3:{s:4:"text";s:35:"
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:4:"void";i:1;s:0:"";}}s:6:"atLine";i:51;}i:5;a:7:{s:6:"header";s:31:"public function getMimeType() {";s:11:"parentClass";s:18:"tx_pmkfdl_download";s:4:"cDat";a:3:{s:4:"text";s:35:"
 
 Returns mimetype of current file
-";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:48:"$mimetype; Mimetype that match selected filetype";}}s:7:"content";s:0:"";s:12:"content_size";i:1052;s:13:"content_lines";i:29;s:6:"atLine";i:96;}}}s:14:"MD5_07d16e3590";a:4:{s:8:"filename";s:24:"class.tx_pmkfdl_hook.php";s:8:"filesize";i:4374;s:6:"header";N;s:3:"DAT";a:5:{i:1;a:8:{s:6:"header";s:59:"class tx_pmkfdl_hook implements tslib_content_stdWrapHook {";s:5:"class";i:1;s:11:"parentClass";s:14:"tx_pmkfdl_hook";s:4:"cDat";a:3:{s:4:"text";s:75:"
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:48:"$mimetype; Mimetype that match selected filetype";}}s:7:"content";s:0:"";s:12:"content_size";i:1072;s:13:"content_lines";i:29;s:6:"atLine";i:104;}}}s:14:"MD5_07d16e3590";a:4:{s:8:"filename";s:24:"class.tx_pmkfdl_hook.php";s:8:"filesize";i:4470;s:6:"header";N;s:3:"DAT";a:5:{i:1;a:8:{s:6:"header";s:59:"class tx_pmkfdl_hook implements tslib_content_stdWrapHook {";s:5:"class";i:1;s:11:"parentClass";s:14:"tx_pmkfdl_hook";s:4:"cDat";a:3:{s:4:"text";s:75:"
 
 Class which hook into tslib_content and do additional stdWrap processing
 ";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}}s:7:"content";s:0:"";s:12:"content_size";i:2;s:13:"content_lines";i:1;s:6:"atLine";i:45;}i:3;a:7:{s:6:"header";s:94:"public function stdWrapPreProcess($content, array $configuration, tslib_cObj &$parentObject) {";s:11:"parentClass";s:14:"tx_pmkfdl_hook";s:4:"cDat";a:3:{s:4:"text";s:66:"
