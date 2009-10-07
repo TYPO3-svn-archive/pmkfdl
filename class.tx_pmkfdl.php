@@ -64,7 +64,7 @@
 					$blowfish = new Blowfish($GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']);
 					$file = $blowfish->encrypt($file);
 				}
-				$content = 'index.php?eID=pmkfdl&file='.urlencode($file).'&ck='.md5_file($filepath);
+				$content = 'index.php?eID=pmkfdl&file='.rawurlencode($file).'&ck='.md5_file($filepath);
 				if (preg_match('/\|?forcedl\|?/i', $conf['makeDownloadLink'])) {
 					// Force download
 					$content.='&forcedl=1';

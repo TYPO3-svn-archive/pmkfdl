@@ -37,7 +37,6 @@
  */
 
 require_once(PATH_t3lib.'class.t3lib_div.php');
-require_once('class.encryption.php');
 
  /**
   * Main class. eID based. Sends the file using the 'header' function.
@@ -55,7 +54,7 @@ require_once('class.encryption.php');
 			//$feUserObj = tslib_eidtools::initFeUser(); // Initialize FE user object
 			//tslib_eidtools::connectDB(); //Connect to database
 
-			$this->file = urldecode(t3lib_div::_GET('file'));
+			$this->file = rawurldecode(t3lib_div::_GET('file'));
 			$md5 = t3lib_div::_GET('ck');
 			$forcedl = intval(t3lib_div::_GET('forcedl'));
 
