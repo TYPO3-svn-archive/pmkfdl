@@ -37,6 +37,7 @@
  */
 
 require_once(PATH_t3lib.'class.t3lib_div.php');
+require_once('class.encryption.php');
 
  /**
   * Main class. eID based. Sends the file using the 'header' function.
@@ -57,6 +58,13 @@ require_once(PATH_t3lib.'class.t3lib_div.php');
 			$this->file = urldecode(t3lib_div::_GET('file'));
 			$md5 = t3lib_div::_GET('ck');
 			$forcedl = intval(t3lib_div::_GET('forcedl'));
+
+			if(t3lib_extMgm::isLoaded('crypt_blowfish')) {
+				// Decrypt filename if "crypt_blowfish" extension is installed.
+				require_once(t3lib_extMgm::extPath('crypt_blowfish').'lib/class.tx_cryptblowfish.php');
+				$blowfish = new Blowfish($GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']);
+				$this->file = $blowfish->decrypt($this->file);
+			}
 
 			// Exit if:
 			//  No filename or checksum argument is present

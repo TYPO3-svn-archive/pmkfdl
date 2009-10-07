@@ -58,8 +58,17 @@
 			$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['pmkfdl']);
 			$blockedExt = preg_split('/\s*,\s*/',$extConf['blockedExt']);
 			if (file_exists($filepath) && !in_array($filesegments['extension'], $blockedExt)) {
+				// Encrypt filename if "crypt_blowfish" extension is installed.	
+				if (t3lib_extMgm::isLoaded('crypt_blowfish')) {
+					require_once(t3lib_extMgm::extPath('crypt_blowfish').'lib/class.tx_cryptblowfish.php');
+					$blowfish = new Blowfish($GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']);
+					$file = $blowfish->encrypt($file);
+				}
 				$content = 'index.php?eID=pmkfdl&file='.urlencode($file).'&ck='.md5_file($filepath);
-				if ($conf['makeDownloadLink']=='forcedl') $content.='&forcedl=1';
+				if (preg_match('/\|?forcedl\|?/i', $conf['makeDownloadLink'])) {
+					// Force download
+					$content.='&forcedl=1';
+				}
 				$GLOBALS['TSFE']->register['filesize'] = filesize($filepath);
 				$GLOBALS['TSFE']->register['filetype'] = $filesegments['extension'];
 			}
