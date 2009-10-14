@@ -27,10 +27,11 @@
  *
  *
  *
- *   45: class tx_pmkfdl
- *   54:     public function makeDownloadLink($content, $conf)
+ *   46: class tx_pmkfdl
+ *   55:     public function makeDownloadLink($content, $conf)
+ *   92:     public function encrypt($uncrypted,$key)
  *
- * TOTAL FUNCTIONS: 1
+ * TOTAL FUNCTIONS: 2
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -57,22 +58,46 @@
 			$filesegments = pathinfo(strtolower($filepath));
 			$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['pmkfdl']);
 			$blockedExt = preg_split('/\s*,\s*/',$extConf['blockedExt']);
+
 			if (file_exists($filepath) && !in_array($filesegments['extension'], $blockedExt)) {
-				// Encrypt filename if "crypt_blowfish" extension is installed.	
-				if (t3lib_extMgm::isLoaded('crypt_blowfish')) {
-					require_once(t3lib_extMgm::extPath('crypt_blowfish').'lib/class.tx_cryptblowfish.php');
-					$blowfish = new Blowfish($GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']);
-					$file = $blowfish->encrypt($file);
-				}
-				$content = 'index.php?eID=pmkfdl&file='.rawurlencode($file).'&ck='.md5_file($filepath);
+				$out['file'] = $file;
+				$out['ck'] = md5_file($filepath);
 				if (preg_match('/\|?forcedl\|?/i', $conf['makeDownloadLink'])) {
 					// Force download
-					$content.='&forcedl=1';
+					$out['forcedl'] = 1;
 				}
+				if (preg_match('/\|?secure\|?/i', $conf['makeDownloadLink']) && $accessGroups = preg_replace('/^0,-[1|2],?/', '', $GLOBALS['TSFE']->gr_list)) {
+					// Secure download
+					$out['access'] = $accessGroups;
+				}
+				if (preg_match('/\|?secure\|?/i', $conf['makeDownloadLink'])) {
+					$content = 'index.php?eID=pmkfdl&sfile='.tx_pmkfdl::encrypt(http_build_query($out,'','&'),$GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']);
+				}
+				else {
+					$content = 'index.php?eID=pmkfdl&'.http_build_query($out,'','&');
+				}
+				// Set register values with size and type for use from TypoScript
 				$GLOBALS['TSFE']->register['filesize'] = filesize($filepath);
 				$GLOBALS['TSFE']->register['filetype'] = $filesegments['extension'];
 			}
 			return $content;
+		}
+
+	/**
+	 * Encrypt file using mcrypt
+	 *
+	 * @param	string		$uncrypted: unencrypted text
+	 * @param	string		$key: decryption key
+	 * @return	string		$encrypted; encrypted text
+	 */
+		public function encrypt($uncrypted,$key) {
+			$cipher = mcrypt_module_open(MCRYPT_BLOWFISH,'','ecb','');
+			$iv = mcrypt_create_iv(mcrypt_enc_get_iv_size($cipher), MCRYPT_RAND);
+			mcrypt_generic_init($cipher, $key, $iv);
+			$encrypted = mcrypt_generic($cipher,$uncrypted);
+			mcrypt_generic_deinit($cipher);
+			mcrypt_module_close($cipher);
+			return rawurlencode(base64_encode($encrypted));
 		}
 	}
 

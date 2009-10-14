@@ -29,14 +29,14 @@ $EM_CONF[$_EXTKEY] = array(
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
 	'author_company' => '',
-	'version' => '0.1.3',
+	'version' => '0.1.4',
 	'constraints' => array(
 		'depends' => array(
 		),
 		'conflicts' => array(
 		),
 		'suggests' => array(
-			'crypt_blowfish' => '1.1.0'
+			''
 		),
 	),
 	'_md5_values_when_last_written' => 'a:11:{s:9:"ChangeLog";s:4:"7c28";s:10:"README.txt";s:4:"ee2d";s:19:"class.tx_pmkfdl.php";s:4:"8dc4";s:28:"class.tx_pmkfdl_download.php";s:4:"d7b8";s:24:"class.tx_pmkfdl_hook.php";s:4:"4d75";s:21:"ext_conf_template.txt";s:4:"f2ef";s:12:"ext_icon.gif";s:4:"84d7";s:17:"ext_localconf.php";s:4:"5575";s:15:"ext_php_api.dat";s:4:"5e66";s:13:"mimetypes.php";s:4:"9686";s:14:"doc/manual.sxw";s:4:"da12";}',

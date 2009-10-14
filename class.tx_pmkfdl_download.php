@@ -27,11 +27,14 @@
  *
  *
  *
- *   45: class tx_pmkfdl_download
- *   52:     public function makeDownloadLink()
- *   98:     public function getMimeType()
+ *   48: class tx_pmkfdl_download
+ *   55:     public function makeDownloadLink()
+ *  114:     public function getMimeType()
+ *  142:     function decrypt($encrypted,$key)
+ *  158:     function checkAccess($userGroups,$accessGroups)
+ *  174:     public function error()
  *
- * TOTAL FUNCTIONS: 2
+ * TOTAL FUNCTIONS: 5
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -44,38 +47,44 @@ require_once(PATH_t3lib.'class.t3lib_div.php');
   */
 	class tx_pmkfdl_download {
 
-/**
- * Force download of file
- *
- * @return	void
- */
+	/**
+	 * Force download of file
+	 *
+	 * @return	void
+	 */
 		public function makeDownloadLink() {
 			// Currently not needed.
-			//$feUserObj = tslib_eidtools::initFeUser(); // Initialize FE user object
-			//tslib_eidtools::connectDB(); //Connect to database
+			// tslib_eidtools::connectDB(); //Connect to database
 
-			$this->file = rawurldecode(t3lib_div::_GET('file'));
-			$md5 = t3lib_div::_GET('ck');
-			$forcedl = intval(t3lib_div::_GET('forcedl'));
-
-			if(t3lib_extMgm::isLoaded('crypt_blowfish')) {
-				// Decrypt filename if "crypt_blowfish" extension is installed.
-				require_once(t3lib_extMgm::extPath('crypt_blowfish').'lib/class.tx_cryptblowfish.php');
-				$blowfish = new Blowfish($GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']);
-				$this->file = $blowfish->decrypt($this->file);
+			if ($sdata = t3lib_div::_GET('sfile')) {
+				// Encrypted data
+				parse_str($this->decrypt($sdata,$GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']),$getval);
+				$feUserObj = tslib_eidtools::initFeUser(); // Initialize FE user object
+				$userGroups =  t3lib_div::intExplode(',',$feUserObj->user['usergroup']);
+				$accessGroups = t3lib_div::intExplode(',',$getval['access']);
+				$access = $this->checkAccess($userGroups,$accessGroups);
 			}
+			else {
+				$getval = t3lib_div::_GET();
+				$access = true;
+			}
+			$this->file = rawurldecode($getval['file']);
+			$md5 = $getval['ck'];
+			$forcedl = intval( $getval['forcedl']);
 
 			// Exit if:
 			//  No filename or checksum argument is present
 			//  File doesn't exist
 			//   md5 checksum of file doesn't match the checksum argument
-			if ($this->file == '' || $md5 == '' || !file_exists($this->file) || @md5_file($this->file) != $md5) exit;
+			if ($this->file == '' || $md5 == '' || !file_exists($this->file) || @md5_file($this->file) != $md5)
+				$this->error();
 
 			$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['pmkfdl']);
 			$blockedExt = preg_split('/\s*,\s*/',$extConf['blockedExt']);
 			$this->filesegments = pathinfo(strtolower($this->file));
 			// Exit if file extension is in list of illegal file extensions
-			if (in_array($this->filesegments['extension'], $blockedExt)) exit;
+			if (in_array($this->filesegments['extension'], $blockedExt))
+				$this->error();
 
 			// Make sure there's nothing else in the buffer
 			ob_end_clean();
@@ -97,11 +106,11 @@ require_once(PATH_t3lib.'class.t3lib_div.php');
 			exit;
 		}
 
-/**
- * Returns mimetype of current file
- *
- * @return	string		$mimetype; Mimetype that match selected filetype
- */
+	/**
+	 * Returns mimetype of current file
+	 *
+	 * @return	string		$mimetype; Mimetype that match selected filetype
+	 */
 		public function getMimeType() {
 			$mimetype = '';
 			// 1st choice: finfo_file
@@ -121,6 +130,50 @@ require_once(PATH_t3lib.'class.t3lib_div.php');
 				$mimetype = isset($mimetypes[$this->filesegments['extension']]) ? $mimetypes[$this->filesegments['extension']] : $defaultmimetype;
 			}
 			return $mimetype;
+		}
+
+	/**
+	 * Decrypt file using mcrypt
+	 *
+	 * @param	string		$encrypted: encrypted text
+	 * @param	string		$key: decryption key
+	 * @return	string		$decrypted; decrypted text
+	 */
+		function decrypt($encrypted,$key) {
+			$cipher = mcrypt_module_open(MCRYPT_BLOWFISH,'','ecb','');
+			$iv = mcrypt_create_iv(mcrypt_enc_get_iv_size($cipher), MCRYPT_RAND);
+			mcrypt_generic_init($cipher, $key, $iv);
+			$decrypted = mdecrypt_generic($cipher,base64_decode(rawurldecode($encrypted)));
+			mcrypt_generic_deinit($cipher);
+			mcrypt_module_close($cipher);
+			return rtrim($decrypted);
+		}
+	/**
+	 * Checks if user has access to download file, based on TYPO3 access groups
+	 *
+	 * @param	array		$userGroups; fe_groups user belongs to
+	 * @param	array		$accessGroups; fe_groups required for access
+	 * @return	boolean		$access; True if user has the correct access credentials
+	 */
+		function checkAccess($userGroups,$accessGroups) {
+			$access = false;
+			foreach ($userGroups as $group) {
+				if (in_array($group,$accessGroups)) {
+					$access = true;
+					break;
+				}
+			}
+			return $access;
+		}
+
+	/**
+	 * Returns 404 header to browser
+	 *
+	 * @return	void
+	 */
+		public function error() {
+			header($GLOBALS['TYPO3_CONF_VARS']['FE']['pageNotFound_handling_statheader']);
+			exit;
 		}
 
 	}
