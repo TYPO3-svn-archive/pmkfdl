@@ -29,10 +29,10 @@
  *
  *   48: class tx_pmkfdl_download
  *   55:     public function makeDownloadLink()
- *  114:     public function getMimeType()
- *  142:     function decrypt($encrypted,$key)
- *  158:     function checkAccess($userGroups,$accessGroups)
- *  174:     public function error()
+ *  122:     public function getMimeType()
+ *  150:     function decrypt($encrypted,$key)
+ *  166:     function checkAccess($userGroups,$accessGroups)
+ *  182:     public function error()
  *
  * TOTAL FUNCTIONS: 5
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -93,7 +93,7 @@ require_once(PATH_t3lib.'class.t3lib_div.php');
 					t3lib_div::callUserFunction($_funcRef,$_params,$this);
 				}
 			}
-		
+
 			// Make sure there's nothing else in the buffer
 			ob_end_clean();
 

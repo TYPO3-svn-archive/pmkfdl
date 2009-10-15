@@ -29,7 +29,7 @@
  *
  *   46: class tx_pmkfdl
  *   55:     public function makeDownloadLink($content, $conf)
- *   92:     public function encrypt($uncrypted,$key)
+ *   93:     public function encrypt($uncrypted,$key)
  *
  * TOTAL FUNCTIONS: 2
  * (This index is automatically created/updated by the extension "extdeveval")
