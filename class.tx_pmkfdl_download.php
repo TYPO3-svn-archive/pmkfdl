@@ -59,24 +59,24 @@ require_once(PATH_t3lib.'class.t3lib_div.php');
 			if ($sdata = t3lib_div::_GET('sfile')) {
 				// Encrypted data
 				parse_str($this->decrypt($sdata,$GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']),$getval);
-				$feUserObj = tslib_eidtools::initFeUser(); // Initialize FE user object
-				$userGroups =  t3lib_div::intExplode(',',$feUserObj->user['usergroup']);
-				$accessGroups = t3lib_div::intExplode(',',$getval['access']);
-				$access = $this->checkAccess($userGroups,$accessGroups);
+				$this->feUserObj = tslib_eidtools::initFeUser(); // Initialize FE user object
+				$this->userGroups =  t3lib_div::intExplode(',',$this->feUserObj->user['usergroup']);
+				$this->accessGroups = t3lib_div::intExplode(',',$getval['access']);
+				$this->access = $this->checkAccess($this->userGroups,$this->accessGroups);
 			}
 			else {
 				$getval = t3lib_div::_GET();
-				$access = true;
+				$this->access = true;
 			}
 			$this->file = rawurldecode($getval['file']);
-			$md5 = $getval['ck'];
-			$forcedl = intval( $getval['forcedl']);
+			$this->md5 = $getval['ck'];
+			$this->forcedl = intval( $getval['forcedl']);
 
 			// Exit if:
 			//  No filename or checksum argument is present
 			//  File doesn't exist
 			//   md5 checksum of file doesn't match the checksum argument
-			if ($this->file == '' || $md5 == '' || !file_exists($this->file) || @md5_file($this->file) != $md5)
+			if ($this->file == '' || $this->md5 == '' || !file_exists($this->file) || @md5_file($this->file) != $this->md5)
 				$this->error();
 
 			$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['pmkfdl']);
@@ -86,11 +86,19 @@ require_once(PATH_t3lib.'class.t3lib_div.php');
 			if (in_array($this->filesegments['extension'], $blockedExt))
 				$this->error();
 
+			// Call hook for possible manipulation of data
+			if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['pmkfdl']['postProcessHook'])) {
+				$_params = array('pObj' => &$this);
+				foreach($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['pmkfdl']['postProcessHook'] as $_funcRef) {
+					t3lib_div::callUserFunction($_funcRef,$_params,$this);
+				}
+			}
+		
 			// Make sure there's nothing else in the buffer
 			ob_end_clean();
 
 			// Get mimetype
-			$mimetype = $forcedl ? 'application/force-download' : $this->getMimeType();
+			$mimetype = $this->forcedl ? 'application/force-download' : $this->getMimeType();
 
 			// Start sending headers
 			header('Pragma: public'); // required
