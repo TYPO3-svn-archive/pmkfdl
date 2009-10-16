@@ -12,7 +12,8 @@ $TYPO3_CONF_VARS['FE']['eID_include']['pmkfdl'] = 'EXT:pmkfdl/class.tx_pmkfdl_do
 $conf = unserialize($_EXTCONF);
 if ($conf['enableExampleHook']) {
 	// Load and activate example hook
-	require_once(t3lib_extMgm::extPath($_EXTKEY).'res/class.tx_pmkfdl_postprocess_hook.php');
-	$TYPO3_CONF_VARS['EXTCONF']['pmkfdl']['postProcessHook'][] = 'tx_pmkfdl_postprocess_hook->postProcessHook'; 
+	require_once(t3lib_extMgm::extPath($_EXTKEY).'res/class.tx_pmkfdl_process_hook.php');
+	$TYPO3_CONF_VARS['EXTCONF']['pmkfdl']['postProcessHook'][] = 'tx_pmkfdl_process_hook->postProcessHook'; 
+	$TYPO3_CONF_VARS['EXTCONF']['pmkfdl']['preProcessHook'][] = 'tx_pmkfdl_process_hook->preProcessHook'; 
 }
 ?>

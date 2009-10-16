@@ -29,7 +29,7 @@
  *
  *   46: class tx_pmkfdl
  *   55:     public function makeDownloadLink($content, $conf)
- *   93:     public function encrypt($uncrypted,$key)
+ *  102:     public function encrypt($uncrypted,$key)
  *
  * TOTAL FUNCTIONS: 2
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -70,6 +70,15 @@
 					// Secure download
 					$out['access'] = $accessGroups;
 				}
+
+				// Call hook for possible manipulation of data
+				if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['pmkfdl']['preProcessHook'])) {
+					$_params = array('pObj' => &$this,'out' => &$out);
+					foreach($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['pmkfdl']['preProcessHook'] as $_funcRef) {
+						t3lib_div::callUserFunction($_funcRef,$_params,$this);
+					}
+				}
+
 				if (preg_match('/\|?secure\|?/i', $conf['makeDownloadLink'])) {
 					$content = 'index.php?eID=pmkfdl&sfile='.tx_pmkfdl::encrypt(http_build_query($out,'','&'),$GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']);
 				}

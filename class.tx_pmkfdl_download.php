@@ -29,10 +29,10 @@
  *
  *   48: class tx_pmkfdl_download
  *   55:     public function makeDownloadLink()
- *  122:     public function getMimeType()
- *  150:     function decrypt($encrypted,$key)
- *  166:     function checkAccess($userGroups,$accessGroups)
- *  182:     public function error()
+ *  124:     public function getMimeType()
+ *  152:     function decrypt($encrypted,$key)
+ *  168:     function checkAccess($userGroups,$accessGroups)
+ *  184:     public function error()
  *
  * TOTAL FUNCTIONS: 5
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -58,19 +58,21 @@ require_once(PATH_t3lib.'class.t3lib_div.php');
 
 			if ($sdata = t3lib_div::_GET('sfile')) {
 				// Encrypted data
-				parse_str($this->decrypt($sdata,$GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']),$getval);
 				$this->feUserObj = tslib_eidtools::initFeUser(); // Initialize FE user object
+				parse_str($this->decrypt($sdata,$GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']),$this->getParams);
 				$this->userGroups =  t3lib_div::intExplode(',',$this->feUserObj->user['usergroup']);
-				$this->accessGroups = t3lib_div::intExplode(',',$getval['access']);
+				$this->accessGroups = t3lib_div::intExplode(',',$this->getParams['access']);
 				$this->access = $this->checkAccess($this->userGroups,$this->accessGroups);
 			}
 			else {
-				$getval = t3lib_div::_GET();
+				$this->getParams = t3lib_div::_GET();
+				$this->accessGroups = array(-1);
+				$this->userGroups = array(-1);
 				$this->access = true;
 			}
-			$this->file = rawurldecode($getval['file']);
-			$this->md5 = $getval['ck'];
-			$this->forcedl = intval( $getval['forcedl']);
+			$this->file = rawurldecode($this->getParams['file']);
+			$this->md5 = $this->getParams['ck'];
+			$this->forcedl = intval($this->getParams['forcedl']);
 
 			// Exit if:
 			//  No filename or checksum argument is present
