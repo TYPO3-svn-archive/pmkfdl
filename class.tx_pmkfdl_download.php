@@ -27,19 +27,17 @@
  *
  *
  *
- *   48: class tx_pmkfdl_download
- *   55:     public function makeDownloadLink()
- *  124:     public function getMimeType()
- *  152:     function decrypt($encrypted,$key)
- *  168:     function checkAccess($userGroups,$accessGroups)
- *  184:     public function error()
+ *   46: class tx_pmkfdl_download
+ *   53:     public function makeDownloadLink()
+ *  121:     private function getMimeType()
+ *  149:     private function decrypt($encrypted,$key)
+ *  165:     private function checkAccess($userGroups,$accessGroups)
+ *  181:     private function error()
  *
  * TOTAL FUNCTIONS: 5
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
-
-require_once(PATH_t3lib.'class.t3lib_div.php');
 
  /**
   * Main class. eID based. Sends the file using the 'header' function.
@@ -53,9 +51,8 @@ require_once(PATH_t3lib.'class.t3lib_div.php');
 	 * @return	void
 	 */
 		public function makeDownloadLink() {
-			// Currently not needed.
-			// tslib_eidtools::connectDB(); //Connect to database
-
+			// Connect to database. Currently not needed.
+			tslib_eidtools::connectDB();
 			if ($sdata = t3lib_div::_GET('sfile')) {
 				// Encrypted data
 				$this->feUserObj = tslib_eidtools::initFeUser(); // Initialize FE user object
@@ -121,7 +118,7 @@ require_once(PATH_t3lib.'class.t3lib_div.php');
 	 *
 	 * @return	string		$mimetype; Mimetype that match selected filetype
 	 */
-		public function getMimeType() {
+		private function getMimeType() {
 			$mimetype = '';
 			// 1st choice: finfo_file
 			if (function_exists('finfo_file')) {
@@ -149,7 +146,7 @@ require_once(PATH_t3lib.'class.t3lib_div.php');
 	 * @param	string		$key: decryption key
 	 * @return	string		$decrypted; decrypted text
 	 */
-		function decrypt($encrypted,$key) {
+		private function decrypt($encrypted,$key) {
 			$cipher = mcrypt_module_open(MCRYPT_BLOWFISH,'','ecb','');
 			$iv = mcrypt_create_iv(mcrypt_enc_get_iv_size($cipher), MCRYPT_RAND);
 			mcrypt_generic_init($cipher, $key, $iv);
@@ -165,7 +162,7 @@ require_once(PATH_t3lib.'class.t3lib_div.php');
 	 * @param	array		$accessGroups; fe_groups required for access
 	 * @return	boolean		$access; True if user has the correct access credentials
 	 */
-		function checkAccess($userGroups,$accessGroups) {
+		private function checkAccess($userGroups,$accessGroups) {
 			$access = false;
 			foreach ($userGroups as $group) {
 				if (in_array($group,$accessGroups)) {
@@ -181,7 +178,7 @@ require_once(PATH_t3lib.'class.t3lib_div.php');
 	 *
 	 * @return	void
 	 */
-		public function error() {
+		private function error() {
 			header($GLOBALS['TYPO3_CONF_VARS']['FE']['pageNotFound_handling_statheader']);
 			exit;
 		}

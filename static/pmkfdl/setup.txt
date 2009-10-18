@@ -1,0 +1,73 @@
+lib.downloadLink = COA
+lib.downloadLink {
+
+    wrap = <div class="pmkfdl-link">|</div>
+
+    # First we store the link in a register value, since
+    # we want to display an icon BEFORE the link.
+    10 = LOAD_REGISTER
+    10.filelink.cObject = TEXT
+    10.filelink.cObject {
+        value = 
+        typolink.parameter = 
+		typolink.parameter.postUserFunc = tx_pmkfdl->makeDownloadLink
+        typolink.parameter.postUserFunc.makeDownloadLink = {$lib.downloadLink.makeDownloadLink}
+    }
+
+    # Display the fileicon and filelink
+    20 = CASE
+    20 {
+        # Wrapping of image, incl. the filelink from previously created register value
+        stdWrap.dataWrap = |&nbsp;{register:filelink}
+
+        # Case key is the filetype (from register value)
+        key.data = register:filetype
+
+        default = IMAGE
+		default.file = {$lib.downloadLink.fileIconPath}file.png
+
+        csv < .default
+        csv.file = {$lib.downloadLink.fileIconPath}csv.png
+		
+        txt < .default
+        txt.file = {$lib.downloadLink.fileIconPath}txt.png
+		
+        pdf < .default
+        pdf.file = {$lib.downloadLink.fileIconPath}pdf.png
+		
+        doc < .default
+        doc.file = {$lib.downloadLink.fileIconPath}doc.png
+
+        xls < .default
+        xls.file = {$lib.downloadLink.fileIconPath}xls.png
+		
+        mp3 < .default
+        mp3.file = {$lib.downloadLink.fileIconPath}mp3.png
+				
+        gif < .default
+        gif.file = {$lib.downloadLink.fileIconPath}gif.png
+
+        jpg < .default
+        jpg.file = {$lib.downloadLink.fileIconPath}jpg.png
+
+        rar < .default
+        rar.file = {$lib.downloadLink.fileIconPath}rar.png
+		
+        zip < .default
+        zip.file = {$lib.downloadLink.fileIconPath}zip.png
+		
+        # You can add more types here
+    }
+
+    # Display the filesize ( from register value)
+    30 = TEXT
+    30.data = register:filesize
+    30.bytes = 1
+    30.wrap = &nbsp;(|)
+}
+
+# Example of use:
+#10 < lib.downloadLink
+#10.10.filelink.cObject.value = Download manual
+#10.10.filelink.cObject.typolink.parameter = fileadmin/user_upload/manual.pdf
+

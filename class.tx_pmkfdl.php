@@ -29,7 +29,7 @@
  *
  *   46: class tx_pmkfdl
  *   55:     public function makeDownloadLink($content, $conf)
- *  102:     public function encrypt($uncrypted,$key)
+ *  102:     private function encrypt($uncrypted,$key)
  *
  * TOTAL FUNCTIONS: 2
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -53,37 +53,37 @@
 	 * @return	string		$content: Modified link
 	 */
 		public function makeDownloadLink($content, $conf) {
+			if (!$content) return;
 			$file = str_replace(t3lib_div::getIndpEnv('TYPO3_SITE_URL'), '', $content);
 			$filepath = PATH_site.$file;
 			$filesegments = pathinfo(strtolower($filepath));
 			$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['pmkfdl']);
 			$blockedExt = preg_split('/\s*,\s*/',$extConf['blockedExt']);
-
 			if (file_exists($filepath) && !in_array($filesegments['extension'], $blockedExt)) {
-				$out['file'] = $file;
-				$out['ck'] = md5_file($filepath);
+				$getParams['file'] = $file;
+				$getParams['ck'] = md5_file($filepath);
 				if (preg_match('/\|?forcedl\|?/i', $conf['makeDownloadLink'])) {
 					// Force download
-					$out['forcedl'] = 1;
+					$getParams['forcedl'] = 1;
 				}
 				if (preg_match('/\|?secure\|?/i', $conf['makeDownloadLink']) && $accessGroups = preg_replace('/^0,-[1|2],?/', '', $GLOBALS['TSFE']->gr_list)) {
 					// Secure download
-					$out['access'] = $accessGroups;
+					$getParams['access'] = $accessGroups;
 				}
 
 				// Call hook for possible manipulation of data
 				if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['pmkfdl']['preProcessHook'])) {
-					$_params = array('pObj' => &$this,'out' => &$out);
+					$_params = array('pObj' => &$this,'getParams' => &$getParams);
 					foreach($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['pmkfdl']['preProcessHook'] as $_funcRef) {
 						t3lib_div::callUserFunction($_funcRef,$_params,$this);
 					}
 				}
 
 				if (preg_match('/\|?secure\|?/i', $conf['makeDownloadLink'])) {
-					$content = 'index.php?eID=pmkfdl&sfile='.tx_pmkfdl::encrypt(http_build_query($out,'','&'),$GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']);
+					$content = 'index.php?eID=pmkfdl&sfile='.tx_pmkfdl::encrypt(http_build_query($getParams,'','&'),$GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']);
 				}
 				else {
-					$content = 'index.php?eID=pmkfdl&'.http_build_query($out,'','&');
+					$content = 'index.php?eID=pmkfdl&'.http_build_query($getParams,'','&');
 				}
 				// Set register values with size and type for use from TypoScript
 				$GLOBALS['TSFE']->register['filesize'] = filesize($filepath);
@@ -99,7 +99,7 @@
 	 * @param	string		$key: decryption key
 	 * @return	string		$encrypted; encrypted text
 	 */
-		public function encrypt($uncrypted,$key) {
+		private function encrypt($uncrypted,$key) {
 			$cipher = mcrypt_module_open(MCRYPT_BLOWFISH,'','ecb','');
 			$iv = mcrypt_create_iv(mcrypt_enc_get_iv_size($cipher), MCRYPT_RAND);
 			mcrypt_generic_init($cipher, $key, $iv);

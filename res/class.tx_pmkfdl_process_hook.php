@@ -76,7 +76,7 @@ class tx_pmkfdl_process_hook {
 	 */
 	function preProcessHook(&$params, &$pObj) {
 		// Add id of page as extra GET parameter
-		$params['out']['pageid'] = $GLOBALS['TSFE']->page['uid'];
+		$params['getParams']['pageid'] = $GLOBALS['TSFE']->page['uid'];
 	}
 
 	/**
