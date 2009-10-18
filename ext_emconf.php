@@ -3,7 +3,7 @@
 ########################################################################
 # Extension Manager/Repository config file for ext: "pmkfdl"
 #
-# Auto generated 18-10-2009 11:28
+# Auto generated 18-10-2009 11:54
 #
 # Manual updates:
 # Only the data in the array - anything else is removed by next write.
@@ -12,7 +12,7 @@
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'PMK Forced Download',
-	'description' => 'Makes it possible to force download of files like images, PDFs, MP3 ect., overriding the browser settings. (Normally when you click on a TYPO3 link to a file like an image, the image will open directly in the browser.)',
+	'description' => 'Makes it possible to force download of files like images, PDFs, MP3 ect., overriding the browser settings. Can create secure download links based on usergroup access.',
 	'category' => 'fe',
 	'author' => 'Peter Klein',
 	'author_email' => 'pmk@io.dk',
@@ -29,7 +29,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'clearCacheOnLoad' => 1,
 	'lockType' => '',
 	'author_company' => '',
-	'version' => '0.1.9',
+	'version' => '0.2.0',
 	'constraints' => array(
 		'depends' => array(
 			'typo3' => '4.0.0-0.0.0',
