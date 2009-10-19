@@ -29,8 +29,8 @@
  *
  *   44: class tx_pmkfdl_process_hook
  *   53:     function postProcessHook(&$params, &$pObj)
- *   77:     function preProcessHook(&$params, &$pObj)
- *   89:     function logDownload( $logFile,$logData)
+ *   78:     function preProcessHook(&$params, &$pObj)
+ *   90:     function logDownload( $logFile,$logData)
  *
  * TOTAL FUNCTIONS: 3
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -64,7 +64,8 @@ class tx_pmkfdl_process_hook {
 			$logData['userid'] = $user['uid'];
 			$logData['username'] = $user['username'];
 		}
-		$this->logDownload('pmkfdl_log.txt',$logData);
+		$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['pmkfdl']);
+		$this->logDownload($extConf['logfile'],$logData);
 	}
 
 	/**
@@ -88,9 +89,9 @@ class tx_pmkfdl_process_hook {
 	 */
 	function logDownload( $logFile,$logData) {
 		$logFile = PATH_site . "/fileadmin/" . $logFile;
-		$data = '"'.implode('";"',$logData).'"'.chr(13);
+		$data = '"'.implode('";"',$logData).'"'.chr(13).chr(10);
 		if (!file_exists($logFile) || !filesize($logFile)) {
-			$data = '"'.implode('";"',array_keys($logData)).'"'.chr(13).$data;
+			$data = '"'.implode('";"',array_keys($logData)).'"'.chr(13).chr(10).$data;
 		}
 		if (file_put_contents($logFile, $data, FILE_APPEND | LOCK_EX ) === false) {
 			error_log('pmkfdl - download log file not writable ({'.$logFile.'})', 0);

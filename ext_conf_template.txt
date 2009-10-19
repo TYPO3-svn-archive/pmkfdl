@@ -2,6 +2,9 @@
 # cat=basic/other/a1; type=string; label=Blocked file extensions:For security, files with these extensions will be blocked from downloading.
 blockedExt = php,php4,php5,inc,sql
 
-# cat=basic/enable/e1; type=boolean; label=Enable example hook script?:If enabled the downloads is post processed using a hook in the download script. The example script will create a logfile in fileadmin, named "pmkfdl_log.txt". The log is updated with various info whenever a file is downloaded.
+# cat=basic/enable/b1; type=boolean; label=Enable example hook script?:If enabled the downloads is post processed using a hook in the download script. The example script will create a logfile in fileadmin, named "pmkfdl_log.txt". The log is updated with various info whenever a file is downloaded.
 enableExampleHook = 1
+
+# cat=basic/other/b2; type=string; label=Path to logfile: If the example hook is enabled, you can specify the path/name of the logfile (Relative to the fileadmin/ folder)
+logfile = pmkfdl_log.txt
 
