@@ -16,4 +16,9 @@ if ($conf['enableExampleHook']) {
 	$TYPO3_CONF_VARS['EXTCONF']['pmkfdl']['postProcessHook'][] = 'tx_pmkfdl_process_hook->postProcessHook'; 
 	$TYPO3_CONF_VARS['EXTCONF']['pmkfdl']['preProcessHook'][] = 'tx_pmkfdl_process_hook->preProcessHook'; 
 }
+if ($conf['ttnewsFileHook'] && t3lib_extMgm::isLoaded('tt_news')) {
+//	require_once(t3lib_extMgm::extPath($_EXTKEY).'class.tx_pmkfdl_ttnews_filemarkers.php');
+//	$TYPO3_CONF_VARS['EXTCONF']['tt_news']['extraItemMarkerHook'][] = 'tx_pmkfdl_ttnews_filemarkers'; 
+	$TYPO3_CONF_VARS['EXTCONF']['tt_news']['extraItemMarkerHook'][] = 'EXT:pmkfdl/res/class.tx_pmkfdl_ttnews_filemarkers.php:tx_pmkfdl_ttnews_filemarkers'; 
+}
 ?>

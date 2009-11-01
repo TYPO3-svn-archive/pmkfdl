@@ -71,3 +71,9 @@ lib.downloadLink {
 #10.10.filelink.cObject.value = Download manual
 #10.10.filelink.cObject.typolink.parameter = fileadmin/user_upload/manual.pdf
 
+
+plugin.tt_news.newsFiles_pmkfdl < lib.downloadLink
+plugin.tt_news.newsFiles_pmkfdl.wrap = <dd>|</dd>
+plugin.tt_news.newsFiles_pmkfdl.10.filelink.cObject.value >
+plugin.tt_news.newsFiles_pmkfdl.10.filelink.cObject.field = pmkfdl_filename
+plugin.tt_news.newsFiles_pmkfdl.10.filelink.cObject.typolink.parameter.field = pmkfdl_filepath
