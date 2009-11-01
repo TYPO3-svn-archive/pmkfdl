@@ -1,7 +1,55 @@
 <?php
+	/***************************************************************
+	*  Copyright notice
+	*
+	*  (c) 2009 Peter Klein <pmk@io.dk>
+	*  All rights reserved
+	*
+	*  This script is part of the TYPO3 project. The TYPO3 project is
+	*  free software; you can redistribute it and/or modify
+	*  it under the terms of the GNU General Public License as published by
+	*  the Free Software Foundation; either version 2 of the License, or
+	*  (at your option) any later version.
+	*
+	*  The GNU General Public License can be found at
+	*  http://www.gnu.org/copyleft/gpl.html.
+	*
+	*  This script is distributed in the hope that it will be useful,
+	*  but WITHOUT ANY WARRANTY; without even the implied warranty of
+	*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	*  GNU General Public License for more details.
+	*
+	*  This copyright notice MUST APPEAR in all copies of the script!
+	***************************************************************/
 
+	/**
+ * [CLASS/FUNCTION INDEX of SCRIPT]
+ *
+ *
+ *
+ *   44: class tx_pmkfdl_ttnews_filemarkers
+ *   53:     function extraItemMarkerProcessor($parentMarkerArray, $row, $lConf, $tt_news)
+ *
+ * TOTAL FUNCTIONS: 1
+ * (This index is automatically created/updated by the extension "extdeveval")
+ *
+ */
+
+/**
+ * Class which hook into tt_news and do additional processing on filemarker
+ *
+ */
 class tx_pmkfdl_ttnews_filemarkers {
-	
+
+	/**
+	 * Hook for adding extra markers for a news item
+	 *
+	 * @param	array		$parentMarkerArray: Current marker array
+	 * @param	array		$row : result row for a news item
+	 * @param	array		$lConf : conf vars for the current template
+	 * @param	array		$tt_news : calling object
+	 * @return	array		$parentMarkerArray: filled marker array
+	 */
 	function extraItemMarkerProcessor($parentMarkerArray, $row, $lConf, $tt_news) {
 		$this->conf = &$tt_news->conf;
 		// filelinks
