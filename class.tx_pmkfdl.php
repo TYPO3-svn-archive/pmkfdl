@@ -54,6 +54,7 @@
 	 */
 		public function makeDownloadLink($content, $conf) {
 			if (!$content) return;
+			$this->conf = $conf;
 			$file = str_replace(t3lib_div::getIndpEnv('TYPO3_SITE_URL'), '', $content);
 			$filepath = PATH_site.$file;
 			$filesegments = pathinfo(strtolower($filepath));
