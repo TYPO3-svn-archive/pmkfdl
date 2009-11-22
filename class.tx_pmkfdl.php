@@ -29,7 +29,7 @@
  *
  *   46: class tx_pmkfdl
  *   55:     public function makeDownloadLink($content, $conf)
- *  102:     private function encrypt($uncrypted,$key)
+ *  105:     private function encrypt($uncrypted,$key)
  *
  * TOTAL FUNCTIONS: 2
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -63,6 +63,11 @@
 			if (file_exists($filepath) && !in_array($filesegments['extension'], $blockedExt)) {
 				$getParams['file'] = $file;
 				$getParams['ck'] = md5_file($filepath);
+
+				// Set register values with size and type for use from TypoScript
+				$GLOBALS['TSFE']->register['filesize'] = filesize($filepath);
+				$GLOBALS['TSFE']->register['filetype'] = $filesegments['extension'];
+
 				if (preg_match('/\|?forcedl\|?/i', $conf['makeDownloadLink'])) {
 					// Force download
 					$getParams['forcedl'] = 1;
@@ -86,9 +91,6 @@
 				else {
 					$content = 'index.php?eID=pmkfdl&'.http_build_query($getParams,'','&');
 				}
-				// Set register values with size and type for use from TypoScript
-				$GLOBALS['TSFE']->register['filesize'] = filesize($filepath);
-				$GLOBALS['TSFE']->register['filetype'] = $filesegments['extension'];
 			}
 			return $content;
 		}

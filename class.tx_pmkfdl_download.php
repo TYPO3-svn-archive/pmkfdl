@@ -29,10 +29,10 @@
  *
  *   46: class tx_pmkfdl_download
  *   53:     public function makeDownloadLink()
- *  121:     private function getMimeType()
- *  149:     private function decrypt($encrypted,$key)
- *  165:     private function checkAccess($userGroups,$accessGroups)
- *  181:     private function error()
+ *  119:     private function getMimeType()
+ *  147:     private function decrypt($encrypted,$key)
+ *  163:     private function checkAccess($userGroups,$accessGroups)
+ *  179:     private function error()
  *
  * TOTAL FUNCTIONS: 5
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -70,21 +70,9 @@
 			$this->file = rawurldecode($this->getParams['file']);
 			$this->md5 = $this->getParams['ck'];
 			$this->forcedl = intval($this->getParams['forcedl']);
-
-			// Exit if:
-			//  No filename or checksum argument is present
-			//  File doesn't exist
-			//  md5 checksum of file doesn't match the checksum argument
-			//  Usergroups of user downloading doesn't match the accesgroups for the file
-			if ($this->file == '' || $this->md5 == '' || !file_exists($this->file) || @md5_file($this->file) != $this->md5 || !$this->access)
-				$this->error();
-
-			$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['pmkfdl']);
-			$blockedExt = preg_split('/\s*,\s*/',$extConf['blockedExt']);
+			$this->extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['pmkfdl']);
+			$this->blockedExt = preg_split('/\s*,\s*/',$this->extConf['blockedExt']);
 			$this->filesegments = pathinfo(strtolower($this->file));
-			// Exit if file extension is in list of illegal file extensions
-			if (in_array($this->filesegments['extension'], $blockedExt))
-				$this->error();
 
 			// Call hook for possible manipulation of data
 			if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['pmkfdl']['postProcessHook'])) {
@@ -93,6 +81,15 @@
 					t3lib_div::callUserFunction($_funcRef,$_params,$this);
 				}
 			}
+
+			// Exit if:
+			//  No filename or checksum argument is present
+			//  File doesn't exist
+			//  md5 checksum of file doesn't match the checksum argument
+			//  File extension is in list of illegal file extensions
+			//  Usergroups of user downloading doesn't match the accesgroups for the file
+			if ($this->file == '' || $this->md5 == '' || !file_exists($this->file) || @md5_file($this->file) != $this->md5 || in_array($this->filesegments['extension'], $this->blockedExt) || !$this->access)
+				$this->error();
 
 			// Make sure there's nothing else in the buffer
 			ob_end_clean();
