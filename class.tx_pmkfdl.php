@@ -29,7 +29,7 @@
  *
  *   46: class tx_pmkfdl
  *   55:     public function makeDownloadLink($content, $conf)
- *  105:     private function encrypt($uncrypted,$key)
+ *  109:     private function encrypt($uncrypted,$key)
  *
  * TOTAL FUNCTIONS: 2
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -75,6 +75,10 @@
 				if (preg_match('/\|?secure\|?/i', $conf['makeDownloadLink']) && $accessGroups = preg_replace('/^0,-[1|2],?/', '', $GLOBALS['TSFE']->gr_list)) {
 					// Secure download
 					$getParams['access'] = $accessGroups;
+					// Add current language "L" GETvar, for use when redirecting
+					if ($lang = t3lib_div::_GET('L')) {
+							$getParams['L'] = $lang;
+					}
 				}
 
 				// Call hook for possible manipulation of data

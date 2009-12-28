@@ -29,10 +29,10 @@
  *
  *   46: class tx_pmkfdl_download
  *   53:     public function makeDownloadLink()
- *  119:     private function getMimeType()
- *  147:     private function decrypt($encrypted,$key)
- *  163:     private function checkAccess($userGroups,$accessGroups)
- *  179:     private function error()
+ *  130:     private function getMimeType()
+ *  158:     private function decrypt($encrypted,$key)
+ *  174:     private function checkAccess($userGroups,$accessGroups)
+ *  190:     private function error()
  *
  * TOTAL FUNCTIONS: 5
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -51,7 +51,7 @@
 	 * @return	void
 	 */
 		public function makeDownloadLink() {
-			// Connect to database. Currently not needed.
+			// Connect to database. Currently not needed, but might be useful for hooks.
 			tslib_eidtools::connectDB();
 			if ($sdata = t3lib_div::_GET('sfile')) {
 				// Encrypted data
@@ -82,14 +82,25 @@
 				}
 			}
 
-			// Exit if:
+			// Exit (redirect to 404 page) if:
 			//  No filename or checksum argument is present
 			//  File doesn't exist
 			//  md5 checksum of file doesn't match the checksum argument
 			//  File extension is in list of illegal file extensions
-			//  Usergroups of user downloading doesn't match the accesgroups for the file
-			if ($this->file == '' || $this->md5 == '' || !file_exists($this->file) || @md5_file($this->file) != $this->md5 || in_array($this->filesegments['extension'], $this->blockedExt) || !$this->access)
+			if ($this->file == '' || $this->md5 == '' || !file_exists($this->file) || @md5_file($this->file) != $this->md5 || in_array($this->filesegments['extension'], $this->blockedExt)) {
 				$this->error();
+			}
+
+			// Exit (redirect to 404 or custom page) if:
+			//  Usergroups of user downloading doesn't match the accesgroups for the file
+			if (!$this->access) {
+				if ($this->extConf['noAccess_handling'] && $this->extConf['noAccess_handling_statheader']) {
+					$this->error($this->extConf['noAccess_handling'],$this->extConf['noAccess_handling_statheader']);
+				}
+				else {
+					$this->error();
+				}
+			}
 
 			// Make sure there's nothing else in the buffer
 			ob_end_clean();
@@ -176,8 +187,11 @@
 	 *
 	 * @return	void
 	 */
-		private function error() {
-			header($GLOBALS['TYPO3_CONF_VARS']['FE']['pageNotFound_handling_statheader']);
+		private function error($code='',$header='',$reason='') {
+			$code = $code ? $code : $GLOBALS['TYPO3_CONF_VARS']['FE']['pageNotFound_handling'];
+			$header = $header ? $header : $GLOBALS['TYPO3_CONF_VARS']['FE']['pageNotFound_handling_statheader'];
+			$tsfe = t3lib_div::makeInstance('tslib_fe', $GLOBALS['TYPO3_CONF_VARS'], 0, 0);
+			$tsfe->pageErrorHandler($code, $header, $reason);
 			exit;
 		}
 
