@@ -2,7 +2,7 @@
 	/***************************************************************
 	*  Copyright notice
 	*
-	*  (c) 2009 Peter Klein <pmk@io.dk>
+	*  (c) 2010 Peter Klein <pmk@io.dk>
 	*  All rights reserved
 	*
 	*  This script is part of the TYPO3 project. The TYPO3 project is
@@ -29,7 +29,7 @@
  *
  *   46: class tx_pmkfdl
  *   55:     public function makeDownloadLink($content, $conf)
- *  109:     private function encrypt($uncrypted,$key)
+ *  116:     private function encrypt($uncrypted,$key)
  *
  * TOTAL FUNCTIONS: 2
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -55,7 +55,13 @@
 		public function makeDownloadLink($content, $conf) {
 			if (!$content) return;
 			$this->conf = $conf;
-			$file = str_replace(t3lib_div::getIndpEnv('TYPO3_SITE_URL'), '', $content);
+			// Get the link only, excluding the target, class and title parts.
+			if (preg_match('/^([^\s]*)/s', $content, $regs)) {
+				$tslink = $regs[1];
+			} else {
+				$tslink = $content;
+			}
+			$file = str_replace(t3lib_div::getIndpEnv('TYPO3_SITE_URL'), '', $tslink);
 			$filepath = PATH_site.$file;
 			$filesegments = pathinfo(strtolower($filepath));
 			$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['pmkfdl']);
@@ -90,11 +96,12 @@
 				}
 
 				if (preg_match('/\|?secure\|?/i', $conf['makeDownloadLink'])) {
-					$content = 'index.php?eID=pmkfdl&sfile='.tx_pmkfdl::encrypt(http_build_query($getParams,'','&'),$GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']);
+					tslink = 'index.php?eID=pmkfdl&sfile='.tx_pmkfdl::encrypt(http_build_query($getParams,'','&'),$GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']);
 				}
 				else {
-					$content = 'index.php?eID=pmkfdl&'.http_build_query($getParams,'','&');
+					tslink = 'index.php?eID=pmkfdl&'.http_build_query($getParams,'','&');
 				}
+				$content = preg_replace('/^([^\s]*)/s', $tslink, $content);
 			}
 			return $content;
 		}
