@@ -96,10 +96,10 @@
 				}
 
 				if (preg_match('/\|?secure\|?/i', $conf['makeDownloadLink'])) {
-					tslink = 'index.php?eID=pmkfdl&sfile='.tx_pmkfdl::encrypt(http_build_query($getParams,'','&'),$GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']);
+					$tslink = 'index.php?eID=pmkfdl&sfile='.tx_pmkfdl::encrypt(http_build_query($getParams,'','&'),$GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']);
 				}
 				else {
-					tslink = 'index.php?eID=pmkfdl&'.http_build_query($getParams,'','&');
+					$tslink = 'index.php?eID=pmkfdl&'.http_build_query($getParams,'','&');
 				}
 				$content = preg_replace('/^([^\s]*)/s', $tslink, $content);
 			}
