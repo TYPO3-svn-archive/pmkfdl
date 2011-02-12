@@ -79,7 +79,7 @@ class tx_pmkfdl_hook implements tslib_content_stdWrapHook {
 	 * @return	string		further processed $content
 	 */
 	public function stdWrapProcess($content, array $configuration, tslib_cObj &$parentObject) {
-		if ($configuration['makeDownloadLink']) {
+		if ($configuration['makeDownloadLink'] || $configuration['stdWrapProcess.']['makeDownloadLink']) {
 			$content = tx_pmkfdl::makeDownloadLink($content,$configuration);
 		}
 		return $content;
